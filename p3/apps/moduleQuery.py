@@ -187,6 +187,16 @@ def printDetailReport(buildreport, terminalsize):
     Build comments:
 {comments}
 """.format(comments=wrapper.fill(br["comments"]))
+
+    # Build stack activation message
+    buildstackactivationmessage = ""
+    if "build_stack_activation" in br and br["build_stack_activation"]:
+        buildstackactivationmessage = """
+    {build_stack} activation:
+{build_stack_activation}
+""".format(build_stack=br["build_stack"], build_stack_activation=wrapper.fill(br["build_stack_activation"]))
+
+
     report = u"""
 {border}
   {app_name} : {build_name}
@@ -199,6 +209,7 @@ def printDetailReport(buildreport, terminalsize):
       {moduleloadlines}
 {dependencymessage}
 
+{buildstackactivationmessage}
 
 """.format(
         border=border,
@@ -208,7 +219,8 @@ def printDetailReport(buildreport, terminalsize):
         moduleloadlines=br["activation"].replace("\n", "\n      "),
         dependencymessage=dependencymessage,
         commentsmessage=commentsmessage,
-        build_stack=br["build_stack"]
+        build_stack=br["build_stack"],
+        buildstackactivationmessage=buildstackactivationmessage,
     )
     print(report)
 
