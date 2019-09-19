@@ -208,7 +208,6 @@ def printDetailReport(buildreport, terminalsize):
     This module can be loaded as follows:
       {moduleloadlines}
 {dependencymessage}
-
 {buildstackactivationmessage}
 
 """.format(
@@ -373,7 +372,7 @@ def main(argv=None):
         buildreports = fetchBuildReports(build_name, build_stack_names, args.full_text)
 
         if len(buildreports) == 0:
-            sys.stderr.write("\nUnable to find a match for '%s'\n\n" % args.module_title)
+            sys.stderr.write("\nUnable to find a match for '%s'\n\n" % args.build_name)
             return 1
 
         # Do the full monty for a single match
