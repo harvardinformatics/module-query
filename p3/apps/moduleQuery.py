@@ -372,7 +372,7 @@ def main(argv=None):
         buildreports = fetchBuildReports(build_name, build_stack_names, args.full_text)
 
         if len(buildreports) == 0:
-            sys.stderr.write("\nUnable to find a match for '%s'\n\n" % args.build_name)
+            sys.stderr.write("\nUnable to find a match for '%s' \nsearch was limited to build flavors %s\n\n" % (args.build_name, ', '.join(build_stack_names)))
             return 1
 
         # Do the full monty for a single match
