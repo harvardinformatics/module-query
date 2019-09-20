@@ -37,6 +37,7 @@ setup(
     entry_points={
         'console_scripts': [
             'module-query=p3.apps.moduleQuery:main',
+            'check-activation=p3.apps.checkActivation:main',
         ]
     },
     install_requires = [
