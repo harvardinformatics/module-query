@@ -124,9 +124,10 @@ def main():
 
         for build in builds:
             result = 'Fail'
+            print("Attempting {} for build {}".format(build["activation"], build["name"]))
             if os.system(build["activation"]) == 0:
                 result = 'Success'
-            print('{}: {}'.format(build.name, result))
+            print('{}: {}'.format(build["name"], result))
 
         return 0
     except KeyboardInterrupt:
