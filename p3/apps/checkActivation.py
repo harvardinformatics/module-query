@@ -57,11 +57,10 @@ def fetchBuildActivation(search, build_stack_names):
             b.name, b.activation
         from
             build b
+                inner join build_stack bs on bs.build_id = b.id
         where
-            b.build_name like %s and
-            b.build_stack_name in ({in_clause})
-        order by
-            app_name, br.build_order
+            b.name like %s and
+            bs.name in ({in_clause})
     """.translate(None, "\n").format(in_clause=format_strings)
 
     # Connection attempt is made.  After MAX_ATTEMPTS tries,
