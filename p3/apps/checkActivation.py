@@ -109,7 +109,7 @@ def main():
         parser = ArgumentParser(description=program_license, formatter_class=RawDescriptionHelpFormatter)
         parser.add_argument("--flavors", dest="build_stacks", help="Comma separated list of application flavors [default: %(default)s]", default=default_flavors)
         parser.add_argument("-v", dest="verbose", action="store_true", help="Get more output.")
-        parser.add_argument("search", metavar="SEARCH", help="Build name search text.  Leave empty to get all of the builds for the application flavors")
+        parser.add_argument("--search", dest="search", default="", help="Build name search text.  Leave empty to get all of the builds for the application flavors")
 
         # Process arguments
         args = parser.parse_args()
