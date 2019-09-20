@@ -57,7 +57,7 @@ def fetchBuildActivation(search, build_stack_names):
             b.name, b.activation
         from
             build b
-                inner join build_stack bs on bs.build_id = b.id
+                inner join build_stack bs on bs.id = b.build_stack_id
         where
             b.name like %s and
             bs.name in ({in_clause})
