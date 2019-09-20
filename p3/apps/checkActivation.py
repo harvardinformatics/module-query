@@ -108,13 +108,14 @@ def main():
         # Setup argument parser
         parser = ArgumentParser(description=program_license, formatter_class=RawDescriptionHelpFormatter)
         parser.add_argument("--flavors", dest="build_stacks", help="Comma separated list of application flavors [default: %(default)s]", default=default_flavors)
+        parser.add_argument("-v", dest="verbose", action="store_true", help="Get more output.")
         parser.add_argument("search", metavar="SEARCH", help="Build name search text.  Leave empty to get all of the builds for the application flavors")
 
         # Process arguments
         args = parser.parse_args()
         build_stack_names = re.split(r'\s*,\s*', args.build_stacks)
-
         search = args.search
+        verbose = args.verbose
 
         builds = fetchBuildActivation(search, build_stack_names)
 
@@ -122,13 +123,17 @@ def main():
             sys.stderr.write("\nUnable to find a match for '%s' \nsearch was limited to build flavors %s\n\n" % (search, ', '.join(build_stack_names)))
             return 1
 
+        verbosestr = " 2> /dev/null 1> /dev/null"
+        if verbose:
+            verbosestr = ""
         for build in builds:
             result = 'Fail'
-            print("Attempting {} for build {}".format(build["activation"], build["name"]))
-            if os.system("module purge && {}".format(build["activation"])) == 0:
+            sys.stdout.write("Attempting {} for build {}... ".format(build["activation"], build["name"]))
+            if os.system("module purge && {} {}".format(build["activation"], verbosestr)) == 0:
                 result = 'Success'
-            print('{}: {}'.format(build["name"], result))
-
+            sys.stdout.write("{}\n".format(result))
+        # Final module purge
+        os.system("module purge")
         return 0
     except KeyboardInterrupt:
         return 0
