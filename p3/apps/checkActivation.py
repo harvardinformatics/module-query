@@ -124,7 +124,7 @@ def main():
 
         for build in builds:
             result = 'Fail'
-            if os.system(build.activation) == 0:
+            if os.system(build["activation"]) == 0:
                 result = 'Success'
             print('{}: {}'.format(build.name, result))
 
