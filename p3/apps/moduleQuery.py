@@ -194,7 +194,7 @@ def printDetailReport(buildreport, terminalsize):
         buildstackactivationmessage = """
     {build_stack} activation:
 {build_stack_activation}
-""".format(build_stack=br["build_stack"], build_stack_activation=wrapper.fill(br["build_stack_activation"]))
+""".format(build_stack=br["build_stack"], build_stack_activation=wrapper.fill(br["build_stack_activation"].replace("\n", "\n      ")))
 
 
     report = u"""
@@ -275,7 +275,7 @@ def printConsolidatedReport(buildreports, terminalsize):
         preferredbuild = ""
         preferredbuildexplanation = ""
         if br["preferred_build"]:
-            preferredbuild = "* "
+            preferredbuild = "*"
             preferredbuildexplanation = "* denotes preferred build."
         vstr = "{margin}{preferredbuild}{moduletitle:.<40} {buildcomments}".format(
             margin=" " * textmargin,
