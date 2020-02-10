@@ -214,7 +214,7 @@ def printDetailReport(buildreport, terminalsize):
         border=border,
         app_name=app_name,
         build_name=br["name"],
-        descriptionlines=descwrapper.fill(br["description"]),
+        descriptionlines='\n'.join([descwrapper.fill(line) for line in br["description"].split('\n')]),
         moduleloadlines=br["activation"].replace("\n", "\n      "),
         dependencymessage=dependencymessage,
         commentsmessage=commentsmessage,
@@ -318,7 +318,7 @@ def printConsolidatedReport(buildreports, terminalsize):
     """.format(
             border=border,
             app_name=app_name,
-            descriptionlines=descwrapper.fill(details["description"]),
+            descriptionlines='\n'.join([descwrapper.fill(line) for line in br["description"].split('\n')]),
             versionlines="\n".join(build_stack_strs),
             example=moduletitle,
             exampleflavor=buildstack,
