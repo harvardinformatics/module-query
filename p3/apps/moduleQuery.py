@@ -266,7 +266,9 @@ def printConsolidatedReport(buildreports, terminalsize):
             apps[app_name]["build_stacks"] = defaultdict(list)
         apps[app_name]["description"] = br["description"]
         moduletitle = br["name"]
+        apps[app_name]["example"] = moduletitle
         buildstack = br["build_stack"]
+        apps[app_name]["example_flavor"] = buildstack
 
         buildcomments = ""
         if "comments" in br and br["comments"] and br["comments"].strip() != "":
@@ -318,10 +320,10 @@ def printConsolidatedReport(buildreports, terminalsize):
     """.format(
             border=border,
             app_name=app_name,
-            descriptionlines='\n'.join([descwrapper.fill(line) for line in br["description"].split('\n')]),
+            descriptionlines='\n'.join([descwrapper.fill(line) for line in details["description"].split('\n')]),
             versionlines="\n".join(build_stack_strs),
-            example=moduletitle,
-            exampleflavor=buildstack,
+            example=details["example"],
+            exampleflavor=details["example_flavor"],
             preferredbuildexplanation=preferredbuildexplanation,
         )
         print(report)
