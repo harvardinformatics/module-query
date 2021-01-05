@@ -41,6 +41,7 @@ setup(
         ]
     },
     install_requires = [
-        'mysqlclient',
+#        'mysqlclient',
+#         'MySQL-python',
     ],
 )

@@ -352,7 +352,7 @@ def main(argv=None):
 
         # Setup argument parser
         parser = ArgumentParser(description=program_license, formatter_class=RawDescriptionHelpFormatter)
-        parser.add_argument("-v", "--verbose", dest="verbose", action="count", help="set verbosity level [default: %(default)s]")
+        parser.add_argument("-v", "--verbose", dest="verbose", action="count", help="set verbosity level [default: %(default)s]", default=0)
         parser.add_argument("--flavors", dest="build_stacks", help="Comma separated list of application flavors [default: %(default)s]", default=default_flavors)
         parser.add_argument("--full-text", action="store_true", help="Search all text, including description.")
         parser.add_argument("build_name", metavar="BUILD", help="Build name.  May be partial.")

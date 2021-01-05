@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  db:
+    image: mariadb
+    volumes:
+      - p3-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=p3
+      - MYSQL_DATABASE=p3
+      - MYSQL_USER=p3
+      - MYSQL_PASSWORD=p3
+    command: '--character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci'
+  cmd:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+volumes:
+  p3-data:
